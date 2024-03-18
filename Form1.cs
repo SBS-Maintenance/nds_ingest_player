@@ -6,13 +6,10 @@ using static mpvnet.Native;
 using static mpvnet.Global;
 using mpvnet;
 
-using System.IO;
 using System.Runtime.InteropServices;
 
 using System.Text.RegularExpressions;
 
-using HtmlAgilityPack;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 
 // Based on Cho Yunghoon's SPAR
@@ -32,13 +29,7 @@ namespace nds_ingest_player
 
         private int position=0;
 
-        private String baseURI = readConfig();
-
-        private static string readConfig()
-        {
-            StreamReader sr = new StreamReader("config.ini");
-            return sr.ReadToEnd();
-        }
+        private String baseURI = "http://10.40.25.111:5010/";
 
         private bool KeepSize() => App.StartSize == "session" || App.StartSize == "always";
         public Form1()
@@ -327,11 +318,10 @@ namespace nds_ingest_player
                 String mediaID = mediaIDTextBox.Text;
                 String year = mediaID.Substring(1, 4);
                 String month = mediaID.Substring(5, 2);
-                //String targetVideo = Check_is_cg(mediaID,year,month);
                 String targetVideo = null;
                 if (targetVideo==null) 
                 { 
-                    targetVideo = baseURI + "NDS_MAIN/" + "NDS_VStream/" + year + "-" + month + "/" + mediaID + ".mp4"; 
+                    targetVideo = baseURI + "NDS_MAIN/" + "NDS_VStream/" + year + "-" + month + "/" + mediaID + ".mov"; 
                 }
 
                 Core.CommandV("loadfile", targetVideo);
@@ -347,28 +337,6 @@ namespace nds_ingest_player
             this.ActiveControl = panel1;
         }
 
-        //private String Check_is_cg(String mediaID,String year,String month)
-        //{
-        //    String day = mediaID.Substring(7, 2);
-        //    String targetDir = baseURI + "NDS_M01_NAS/"+"CG/" + year + "-" + month + "-" + day;
-        //    HtmlWeb web = new HtmlWeb();
-        //    HtmlDocument htmlDoc = web.Load(targetDir);
-        //    HtmlNode preNode = htmlDoc.DocumentNode.SelectSingleNode("//pre");
-        //    if (preNode == null)
-        //    {
-        //        return null;
-        //    }
-        //    HtmlNodeCollection aNodes = preNode.SelectNodes("a");
-        //    foreach(HtmlNode aNode in aNodes)
-        //    {
-        //        String href = aNode.Attributes["href"].Value;
-        //        if (href.Contains(mediaID))
-        //        {
-        //            return targetDir + "/" + href;
-        //        }
-        //    }
-        //    return null;
-        //}
 
         private void playButton_Click(object sender, EventArgs e)
         {
