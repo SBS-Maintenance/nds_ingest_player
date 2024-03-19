@@ -9,6 +9,9 @@ using mpvnet;
 using System.Runtime.InteropServices;
 
 using System.Text.RegularExpressions;
+using System.Diagnostics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Linq;
 
 
 
@@ -25,6 +28,8 @@ namespace nds_ingest_player
         private bool WasMaximized;
         private int LastCycleFullscreen;
 
+        Point _lastCursorPosition;
+
         private Action seek_to_pos = null;
 
         private int position=0;
@@ -40,7 +45,7 @@ namespace nds_ingest_player
             panelHandle = panel1.Handle;
             Core.Init(panel1.Handle);
 
-           
+            LastCycleFullscreen = Environment.TickCount;
 
             while (mpvWindowHandle == IntPtr.Zero)
             {
@@ -206,7 +211,6 @@ namespace nds_ingest_player
             base.OnMouseDown(e);
             if (e.Button != MouseButtons.Left) return;
 
-
             if (e.Button == MouseButtons.Left)
             {
                 if (IsMouseInOSC())
@@ -240,9 +244,6 @@ namespace nds_ingest_player
                 }
                 else
                 {
-                    //var HTCAPTION = new IntPtr(2);
-                    //ReleaseCapture();
-                    //SendMessage(Handle, 0xA1 /* WM_NCLBUTTONDOWN */, HTCAPTION, IntPtr.Zero);
                     Core.SetPropertyBool("pause", !Core.GetPropertyBool("pause"));
                 }
 
@@ -250,6 +251,8 @@ namespace nds_ingest_player
             if (Width - e.Location.X < 10 && e.Location.Y < 10)
                 Core.CommandV("quit");
         }
+
+
         private void mpv_FormClosing(object sender, FormClosingEventArgs e)
         {
             Core.CommandV("quit");
@@ -356,7 +359,6 @@ namespace nds_ingest_player
                 Core.SetPropertyString("fullscreen", "no");
                 CycleFullscreen(false);
             }
-            //
         }
 
         
