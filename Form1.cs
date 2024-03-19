@@ -53,6 +53,8 @@ namespace nds_ingest_player
             }
 
             ClipboardNotification.ClipboardUpdate += ClipboardNotification_ClipboardUpdate;
+
+            Core.SetPropertyString("lavfi-complex", "[aid1]pan=stereo|c0<c0+c1|c1<c0+c1[ao]");
         }
 
 
