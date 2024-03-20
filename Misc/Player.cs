@@ -445,9 +445,9 @@ namespace mpvnet
                                 FileEnded = true;
                                 if (reason == mpv_end_file_reason.MPV_END_FILE_REASON_ERROR)
                                 {
-                                    if (Path.Contains(".mov"))
+                                    if (Path.Contains(".wmv"))
                                     {
-                                        CommandV("loadfile", Path.Replace(".mov", ".mp4"));
+                                        CommandV("loadfile", Path.Replace(".wmv", ".MOV"));
                                     }
                                     else if (Path.Contains(".mp4"))
                                     {
