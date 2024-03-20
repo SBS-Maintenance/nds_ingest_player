@@ -1,0 +1,9 @@
+RIGHT osd-bar seek  1 exact                          # seek 1 seconds forward
+LEFT  osd-bar seek -1  exact                         # seek 1 seconds backward
+UP    osd-bar frame-step                           # go 1 frm
+DOWN  osd-bar frame-back-step                         # go -1 frm
+Shift+RIGHT osd-bar seek  60       exact                     # seek 60 seconds forward
+Shift+LEFT  osd-bar seek -60     exact                      # seek -60 seconds backward
+Shift+UP   osd-bar seek 0.3       exact                   # seek 0.3 seconds forward
+Shift+DOWN osd-bar seek  -0.3     exact                     # seek -0.3 seconds backward
+SPACE cycle pause                      # toggle pause/playback mode

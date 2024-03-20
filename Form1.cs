@@ -326,7 +326,7 @@ namespace nds_ingest_player
                 String targetVideo = null;
                 if (targetVideo==null) 
                 { 
-                    targetVideo = baseURI + "NDS_MAIN/" + "NDS_VStream/" + year + "-" + month + "/" + mediaID + ".mp4"; 
+                    targetVideo = baseURI + "NDS_MAIN/" + "NDS_VStream/" + year + "-" + month + "/" + mediaID + ".wmv"; 
                 }
 
                 Core.CommandV("loadfile", targetVideo);
