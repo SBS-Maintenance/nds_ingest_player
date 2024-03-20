@@ -9,9 +9,6 @@ using mpvnet;
 using System.Runtime.InteropServices;
 
 using System.Text.RegularExpressions;
-using System.Diagnostics;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Linq;
 
 
 
@@ -60,10 +57,10 @@ namespace nds_ingest_player
 
         private void ClipboardNotification_ClipboardUpdate(object sender, EventArgs e)
         {
-            Regex mediaID_regex = new Regex("(^[N]{1}\\d{8,8}[V]{1}\\d{5})");
+            Regex mediaID_regex = new Regex("([N]{1}\\d{8,8}[V]{1}\\d{5})");
             String clipboard_content=Clipboard.GetText();
             Match m=mediaID_regex.Match(clipboard_content);
-            if (m.Groups.Count > 1)
+            if (m.Groups.Count > 0)
             {
                 var mediID = m.Groups[0].ToString();
                 mediaIDTextBox.Text = mediID;
