@@ -260,6 +260,12 @@ namespace nds_ingest_player
 
         private void mpv_KeyDown(object sender, KeyEventArgs e)
         {
+            if(mediaIDTextBox.Focused
+                && (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down || e.KeyCode == Keys.Left || e.KeyCode == Keys.Right))
+            {
+                mediaIDTextBox.Enabled = false;
+                mediaIDTextBox.Enabled = true;
+            }
             if (!e.Shift && e.KeyCode == Keys.Up)
             {
                 Core.Command("osd-bar frame-step");
@@ -278,11 +284,13 @@ namespace nds_ingest_player
             if (e.Shift && e.KeyCode == Keys.Down)
             {
                 Core.Command("osd-bar seek -0.3 exact");
+                if (mediaIDTextBox.Focused)
                 return;
             }
             if (!e.Shift && e.KeyCode == Keys.Right)
             {
                 Core.Command("osd-bar seek 1 exact");
+                if (mediaIDTextBox.Focused)
                 return;
             }
             if (e.Shift && e.KeyCode == Keys.Right)
@@ -299,6 +307,10 @@ namespace nds_ingest_player
             {
                 Core.Command("osd-bar seek -60 exact");
                 return;
+            }
+            if(e.KeyCode == Keys.Space)
+            {
+                Core.SetPropertyBool("pause", !Core.GetPropertyBool("pause"));
             }
             if (e.KeyCode == Keys.F5)
             {
@@ -336,7 +348,7 @@ namespace nds_ingest_player
             catch
             {
             }
-            this.ActiveControl = panel1;
+            this.ActiveControl = null;
         }
 
 
@@ -360,7 +372,41 @@ namespace nds_ingest_player
             }
         }
 
-        
+        private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Left:
+                case Keys.Right:
+                    e.IsInputKey = true;
+                    mediaIDTextBox.Select(0, 0);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void mediaIDTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                play_start();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            play_start();
+            this.ActiveControl = null;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            Application.OpenForms[0].TopMost = checkBox1.Checked;
+            this.ActiveControl = null;
+        }
     }
 }
 
