@@ -400,7 +400,7 @@ namespace mpvnet
             {
                 IntPtr ptr = mpv_wait_event(NamedHandle, -1);
                 mpv_event evt = (mpv_event)Marshal.PtrToStructure(ptr, typeof(mpv_event));
-
+                Console.WriteLine(evt.event_id.ToString());
                 try
                 {
                     switch (evt.event_id)
@@ -413,11 +413,10 @@ namespace mpvnet
                         case mpv_event_id.MPV_EVENT_LOG_MESSAGE:
                             {
                                 var data = (mpv_event_log_message)Marshal.PtrToStructure(evt.data, typeof(mpv_event_log_message));
-
+                                Console.WriteLine(ConvertFromUtf8(data.text));
                                 if (data.log_level == mpv_log_level.MPV_LOG_LEVEL_INFO)
                                 {
                                     string prefix = ConvertFromUtf8(data.prefix);
-
                                     if (prefix == "bd")
                                         ProcessBluRayLogMessage(ConvertFromUtf8(data.text));
                                 }
@@ -445,13 +444,16 @@ namespace mpvnet
                                 FileEnded = true;
                                 if (reason == mpv_end_file_reason.MPV_END_FILE_REASON_ERROR)
                                 {
-                                    if (Path.Contains(".mp4"))
+                                    Console.WriteLine(Path);
+                                    if (Path.Contains(".wmv"))
                                     {
-                                        CommandV("loadfile", Path.Replace(".mp4", ".MOV"));
+                                        SetPropertyString("lavfi-complex", "");
+                                        CommandV("loadfile", Path.Replace(".wmv", ".MOV"));
                                     }
-                                    else if (Path.Contains(".wmv"))
+                                    else if (Path.Contains(".mp4"))
                                     {
-                                        CommandV("loadfile", Path.Replace(".wmv", ".mp4"));
+                                        SetPropertyString("lavfi-complex", "[aid1]pan=stereo|c0<c0+c1|c1<c0+c1[ao]");
+                                        CommandV("loadfile", Path.Replace(".mp4", ".wmv"));
                                     }
                                 }
                             }
@@ -477,7 +479,6 @@ namespace mpvnet
                         case mpv_event_id.MPV_EVENT_PROPERTY_CHANGE:
                             {
                                 var data = (mpv_event_property)Marshal.PtrToStructure(evt.data, typeof(mpv_event_property));
-
                                 if (data.format == mpv_format.MPV_FORMAT_FLAG)
                                 {
                                     lock (BoolPropChangeActions)

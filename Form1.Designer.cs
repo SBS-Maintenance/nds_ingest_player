@@ -36,10 +36,9 @@ namespace nds_ingest_player
             // mediaIDTextBox
             // 
             this.mediaIDTextBox.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.mediaIDTextBox.Location = new System.Drawing.Point(135, 29);
-            this.mediaIDTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.mediaIDTextBox.Location = new System.Drawing.Point(104, 22);
             this.mediaIDTextBox.Name = "mediaIDTextBox";
-            this.mediaIDTextBox.Size = new System.Drawing.Size(464, 39);
+            this.mediaIDTextBox.Size = new System.Drawing.Size(358, 31);
             this.mediaIDTextBox.TabIndex = 2000;
             this.mediaIDTextBox.TabStop = false;
             this.mediaIDTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mediaIDTextBox_KeyDown);
@@ -48,10 +47,9 @@ namespace nds_ingest_player
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(29, 33);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(22, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 32);
+            this.label1.Size = new System.Drawing.Size(84, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "미디어ID";
             // 
@@ -63,10 +61,9 @@ namespace nds_ingest_player
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Location = new System.Drawing.Point(25, 83);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Location = new System.Drawing.Point(19, 62);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1565, 887);
+            this.panel1.Size = new System.Drawing.Size(1205, 666);
             this.panel1.TabIndex = 0;
             this.panel1.DoubleClick += new System.EventHandler(this.panel1_DoubleClick);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -74,9 +71,10 @@ namespace nds_ingest_player
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(619, 29);
+            this.button1.Location = new System.Drawing.Point(476, 22);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 42);
+            this.button1.Size = new System.Drawing.Size(98, 32);
             this.button1.TabIndex = 0;
             this.button1.TabStop = false;
             this.button1.Text = "PLAY";
@@ -86,9 +84,11 @@ namespace nds_ingest_player
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(1444, 40);
+            this.checkBox1.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.checkBox1.Location = new System.Drawing.Point(1111, 30);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(146, 28);
+            this.checkBox1.Size = new System.Drawing.Size(116, 29);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.TabStop = false;
             this.checkBox1.Text = "항상 위로";
@@ -97,9 +97,9 @@ namespace nds_ingest_player
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1616, 987);
+            this.ClientSize = new System.Drawing.Size(1243, 740);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
@@ -107,7 +107,6 @@ namespace nds_ingest_player
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "NDS Ingest Player";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mpv_FormClosing);

@@ -50,8 +50,6 @@ namespace nds_ingest_player
             }
 
             ClipboardNotification.ClipboardUpdate += ClipboardNotification_ClipboardUpdate;
-
-            Core.SetPropertyString("lavfi-complex", "[aid1]pan=stereo|c0<c0+c1|c1<c0+c1[ao]");
         }
 
 
@@ -334,10 +332,10 @@ namespace nds_ingest_player
                 String month = mediaID.Substring(5, 2);
                 String targetVideo = null;
                 if (targetVideo==null) 
-                { 
-                    targetVideo = baseURI + "NDS_MAIN/" + "NDS_VStream/" + year + "-" + month + "/" + mediaID + ".wmv"; 
+                {
+                    targetVideo = baseURI + "NDS_MAIN/" + "NDS_VStream/" + year + "-" + month + "/" + mediaID + ".mp4";
                 }
-
+                Core.SetPropertyString("lavfi-complex", "[aid1]pan=stereo|c0<c0+c1|c1<c0+c1[ao]");
                 Core.CommandV("loadfile", targetVideo);
                 Core.FileLoaded += seek_to_pos = () =>
                 {
